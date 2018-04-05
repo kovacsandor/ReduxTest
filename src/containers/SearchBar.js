@@ -1,12 +1,12 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 import { createActionFetchWeather } from '../actions/index'
 
 class SearchBar extends React.Component {
 
 	constructor(props) {
-        console.log(`SearchBar`)
+		console.log(`SearchBar`)
 		super(props);
 		this.state = {
 			term: ``
@@ -15,8 +15,8 @@ class SearchBar extends React.Component {
 	// Try without state, only props
 
 	render() {
-		console.log(`SearchBar`, this.props.weather)
-		
+		// console.log(`SearchBar`, this.props.weather)
+
 		return (
 			<form
 				className={`input-group`}
@@ -31,7 +31,7 @@ class SearchBar extends React.Component {
 						className={`btn btn-secondary`}
 						type={`submit`}>
 						Submit
-                </button>
+                	</button>
 				</span>
 			</form>
 		)

@@ -1,7 +1,8 @@
-import { connect } from 'react-redux'
+import Chart from '../components/Chart'
+import Map from '../components/Map'
 import React from 'react'
 import _ from 'lodash'
-import { Sparklines, SparklinesLine, SparklinesSpots, SparklinesReferenceLine } from 'react-sparklines'
+import { connect } from 'react-redux'
 
 class WeatherList extends React.Component {
 
@@ -35,6 +36,7 @@ class WeatherList extends React.Component {
                 </thead>
                 <tbody>
                     {this.props.weather.map(info => {
+                        const { lan, lon } = info.city.coord
                         let temporary = [[], [], []]
                         info.list.map(item => {
                             temporary[0].push(item.main.temp)
@@ -43,16 +45,10 @@ class WeatherList extends React.Component {
                         })
                         return (
                             <tr key={info.city.id}>
-                                <td>{info.city.name}</td>
+                                <Map latituge={lat} longitude={lon} />
                                 {temporary.map((t, i) => (
-                                    <td key={`${info.city.id}:${i}`}>
-                                        <Sparklines height={120} width={180} data={t}>
-                                            <SparklinesLine color="#56b45d" />
-                                            <SparklinesSpots style={{ fill: "#56b45d" }} />
-                                            <SparklinesReferenceLine type={`avg`} />
-                                        </Sparklines>
-                                        <div>Average: {_.round(_.sum(t) / t.length)} {i == 0 ? `K` : i == 1 ? `hPa` : `%`}</div>
-                                    </td>
+                                    // <td key={`${info.city.id}:${i}`}>test</td>
+                                    <Chart key={`${info.city.id}:${i}`} data={t} color={`orange`} index={i} />
                                 ))}
                             </tr>
                         )
